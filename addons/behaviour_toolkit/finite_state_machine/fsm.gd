@@ -16,6 +16,7 @@ const ERROR_INITIAL_STATE_NULL: String = "The initial cannot be null when starti
 
 ## The signal emitted when the state changes.
 signal state_changed(state: FSMState)
+signal transitioned(transition: FSMTransition)
 
 
 ## Whether the FSM should start automatically.
@@ -123,7 +124,7 @@ func _process_code(delta: float) -> void:
 		if transition.is_valid(actor, blackboard) or transition.is_valid_event(event):
 			# Process the transition
 			transition._on_transition(actor, blackboard)
-			
+			transitioned.emit(transition)
 			# Change the current state
 			change_state(transition.get_next_state())
 
