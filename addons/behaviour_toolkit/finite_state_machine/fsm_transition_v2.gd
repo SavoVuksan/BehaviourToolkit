@@ -1,11 +1,14 @@
+## This class is an alternative implementation of the Transition. This implementation takes an array of conditions that need to be met 
+## for the transition to happen. All conditions need to be true for the transition to trigger. Globals are not by default in the condition e.g Input
+## they need to be added manually in this class. Current variables accessable from the condition actor, blackboard, Input
 @icon("res://addons/behaviour_toolkit/icons/FSMTransition.svg")
 class_name FsmTransitionV2 extends Node
 
 @export var next_state : FSMState
-@export var conditions : Array[FsmTransitionCondition]
+@export var conditions : Array[FsmTransitionCondition] = []
 
 func evaluate_conditions(actor: Node, blackboard: BtkBlackboard):
-	var succeeded = true
+	var succeeded = false
 	for cond in conditions:
 		if !cond.condition:
 			succeeded = false
