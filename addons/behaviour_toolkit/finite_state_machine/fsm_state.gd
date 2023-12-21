@@ -1,5 +1,7 @@
 @icon("res://addons/behaviour_toolkit/icons/FSMState.svg")
 class_name FSMState extends BehaviourToolkit
+signal entered()
+signal exited()
 ## A state in a [FiniteStateMachine].
 
 

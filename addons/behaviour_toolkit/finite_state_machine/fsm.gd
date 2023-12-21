@@ -88,6 +88,7 @@ func start() -> void:
 
 	# Emit the state changed signal
 	emit_signal("state_changed", active_state)
+	active_state.entered.emit()
 
 
 func  _physics_process(delta: float) -> void:
@@ -138,12 +139,14 @@ func _process_code(delta: float) -> void:
 func change_state(state: FSMState) -> void:
 	# Exit the current state
 	active_state._on_exit(actor, blackboard)
+	active_state.exited.emit()
 
 	# Change the current state
 	active_state = state
 
 	# Enter the new state
 	active_state._on_enter(actor, blackboard)
+	active_state.entered.emit()
 
 	# Emit the state changed signal
 	emit_signal("state_changed", active_state)
