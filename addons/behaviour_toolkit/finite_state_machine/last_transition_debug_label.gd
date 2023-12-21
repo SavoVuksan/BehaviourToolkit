@@ -10,7 +10,7 @@ func _ready() -> void:
 	if parent:
 		_fsm = parent as FiniteStateMachine
 		_fsm.transitioned.connect(_update_label)
-		text = "Last Transition:"
+		text = "Last Transition: - - -"
 
 ## Updates label text to last transition + state of the State Machine
 func _update_label(transition : FSMTransition):
