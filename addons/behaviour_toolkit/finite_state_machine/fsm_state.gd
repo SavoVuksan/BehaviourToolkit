@@ -6,12 +6,12 @@ signal exited()
 
 
 ## List of transitions from this state.
-var transitions: Array[FSMTransition] = []
+var transitions: Array[Node] = []
 
 
 func _ready() -> void:
 	for transition in get_children():
-		if transition is FSMTransition:
+		if transition is FSMTransition or transition is FsmTransitionV2:
 			transitions.append(transition)
 
 

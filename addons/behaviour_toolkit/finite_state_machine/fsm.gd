@@ -16,7 +16,7 @@ const ERROR_INITIAL_STATE_NULL: String = "The initial cannot be null when starti
 
 ## The signal emitted when the state changes.
 signal state_changed(state: FSMState)
-signal transitioned(transition: FSMTransition)
+signal transitioned(transition: Node)
 
 
 ## Whether the FSM should start automatically.

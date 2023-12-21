@@ -13,7 +13,7 @@ func _ready() -> void:
 		text = "Last Transition: - - -"
 
 ## Updates label text to last transition + state of the State Machine
-func _update_label(transition : FSMTransition):
+func _update_label(transition : Node):
 	if !transition or !_fsm or !_fsm.active_state:
 		return
 

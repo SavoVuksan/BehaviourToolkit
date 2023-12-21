@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="FsmTransitionResource" load_steps=2 format=3 uid="uid://eexg5ldp31j5"]
+
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm_transition_condition.gd" id="1_j5pm2"]
+
+[resource]
+script = ExtResource("1_j5pm2")
+target_state = NodePath("")
+condition = ""
