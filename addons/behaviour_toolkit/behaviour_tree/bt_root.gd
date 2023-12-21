@@ -21,7 +21,7 @@ enum ProcessType {
 		_setup_processing()
 
 @export var actor: Node
-@export var blackboard: Blackboard
+@export var blackboard: BtkBlackboard
 
 
 var active: bool = false
@@ -60,8 +60,8 @@ func _process_code(delta: float) -> void:
 	current_status = entry_point.tick(actor, blackboard)
 
 
-func _create_local_blackboard() -> Blackboard:
-	var blackboard: Blackboard = Blackboard.new()
+func _create_local_blackboard() -> BtkBlackboard:
+	var blackboard: BtkBlackboard = BtkBlackboard.new()
 	return blackboard
 
 

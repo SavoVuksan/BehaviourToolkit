@@ -54,7 +54,7 @@ enum ConditionType {
 @export var custom_target: Node
 
 
-func tick(actor: Node, _blackboard: Blackboard):
+func tick(actor: Node, _blackboard: BtkBlackboard):
     var target: Node
     match target_type:
         ConditionTarget.ACTOR:

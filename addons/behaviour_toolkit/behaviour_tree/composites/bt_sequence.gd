@@ -6,7 +6,7 @@ class_name BTSequence extends BTComposite
 var current_leaf: int = 0
 
 
-func tick(actor: Node, blackboard: Blackboard):
+func tick(actor: Node, blackboard: BtkBlackboard):
 	if current_leaf > leaves.size() -1:
 		current_leaf = 0
 		return Status.SUCCESS

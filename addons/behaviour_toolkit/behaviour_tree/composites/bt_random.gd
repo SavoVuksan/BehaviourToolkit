@@ -16,7 +16,7 @@ func _ready():
         rng.seed = hash(seed)
 
 
-func tick(actor: Node, blackboard: Blackboard):
+func tick(actor: Node, blackboard: BtkBlackboard):
     if active_leave == null:
         active_leave = leaves[rng.randi() % leaves.size()]
     

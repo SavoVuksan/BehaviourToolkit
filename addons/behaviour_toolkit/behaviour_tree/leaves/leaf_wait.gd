@@ -8,7 +8,7 @@ class_name LeafWait extends BTLeaf
 var ticks: int = 0
 
 
-func tick(_actor: Node, _blackboard: Blackboard):
+func tick(_actor: Node, _blackboard: BtkBlackboard):
     if ticks < wait_for_ticks:
         ticks += 1
         return Status.RUNNING

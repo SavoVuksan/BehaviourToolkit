@@ -10,7 +10,7 @@ class_name BTRepeat extends BTDecorator
 @onready var cache_key = 'repeat_%s' % self.get_instance_id()
 
 
-func tick(actor: Node, blackboard: Blackboard):
+func tick(actor: Node, blackboard: BtkBlackboard):
 	var current_count = blackboard.get_value(cache_key)
 	if current_count == null:
 		current_count = 0

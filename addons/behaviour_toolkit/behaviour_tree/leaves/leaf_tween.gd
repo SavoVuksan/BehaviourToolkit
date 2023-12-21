@@ -16,7 +16,7 @@ enum TweenValueType {
 
 
 ## The default custom script template.
-const DEFAULT_CUSTOM_SCRIPT = "# Custom Tween Value\nstatic func get_tween_value(_actor: Node, _blackboard: Blackboard) -> Variant:\n\t# Compute your custom logic here\n\treturn 0\n"
+const DEFAULT_CUSTOM_SCRIPT = "# Custom Tween Value\nstatic func get_tween_value(_actor: Node, _blackboard: BtkBlackboard) -> Variant:\n\t# Compute your custom logic here\n\treturn 0\n"
 
 
 ## The transition type of the tween.
@@ -76,7 +76,7 @@ func set_tween_value_type(value):
 var tween : Tween
 
 
-func tick(actor: Node, blackboard: Blackboard) -> Status:
+func tick(actor: Node, blackboard: BtkBlackboard) -> Status:
 	# Initialize tween, if not already initialized
 	_init_tween(actor, blackboard)
 
@@ -89,7 +89,7 @@ func tick(actor: Node, blackboard: Blackboard) -> Status:
 	return Status.SUCCESS
 
 
-func _init_tween(actor: Node, blackboard: Blackboard):
+func _init_tween(actor: Node, blackboard: BtkBlackboard):
 	if tween == null:
 		# Create new tween instance
 		tween = get_tree().create_tween().bind_node(actor)

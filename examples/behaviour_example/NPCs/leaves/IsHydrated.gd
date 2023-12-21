@@ -1,7 +1,7 @@
 extends BTLeaf
 
 
-func tick(actor: Node, _blackboard: Blackboard) -> Status:
+func tick(actor: Node, _blackboard: BtkBlackboard) -> Status:
 	if actor.thirst == 0:
 		return Status.FAILURE
 	

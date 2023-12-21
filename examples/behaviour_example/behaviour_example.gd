@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var global_blackboard: Blackboard
+@export var global_blackboard: BtkBlackboard
 
 
 func _ready():

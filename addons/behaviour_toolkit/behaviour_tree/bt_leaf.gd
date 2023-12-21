@@ -2,5 +2,5 @@
 class_name BTLeaf extends BTBehaviour
 
 
-func tick(_actor: Node, _blackboard: Blackboard) -> Status:
+func tick(_actor: Node, _blackboard: BtkBlackboard) -> Status:
 	return Status.SUCCESS

@@ -1,5 +1,5 @@
-@icon("res://addons/behaviour_toolkit/icons/Blackboard.svg")
-class_name Blackboard extends Resource
+@icon("res://addons/behaviour_toolkit/icons/BtkBlackboard.svg")
+class_name BtkBlackboard extends Resource
 ## A blackboard is a dictionary of key/value pairs that can be used to share data between nodes.
 
 

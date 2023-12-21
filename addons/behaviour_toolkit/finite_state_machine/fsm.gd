@@ -39,7 +39,7 @@ signal transitioned(transition: FSMTransition)
 ## The actor of the FSM.
 @export var actor: Node
 ## The blackboard of the FSM.
-@export var blackboard: Blackboard
+@export var blackboard: BtkBlackboard
 
 
 ## The list of states in the FSM.
@@ -154,8 +154,8 @@ func fire_event(event: String) -> void:
 	current_events.append(event)
 
 
-func _create_local_blackboard() -> Blackboard:
-	var blackboard: Blackboard = Blackboard.new()
+func _create_local_blackboard() -> BtkBlackboard:
+	var blackboard: BtkBlackboard = BtkBlackboard.new()
 	return blackboard
 
 

@@ -4,13 +4,13 @@ class_name DebugTransitionWait extends FSMTransition
 
 var timer : SceneTreeTimer
 # Executed when the transition is taken.
-func _on_transition(_actor: Node, _blackboard: Blackboard) -> void:
+func _on_transition(_actor: Node, _blackboard: BtkBlackboard) -> void:
 	timer = null
 	pass
 
 
 # Evaluates true, if the transition conditions are met.
-func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+func is_valid(_actor: Node, _blackboard: BtkBlackboard) -> bool:
 	if !timer:
 		timer = get_tree().create_timer(time)
 	return timer.time_left <= 0

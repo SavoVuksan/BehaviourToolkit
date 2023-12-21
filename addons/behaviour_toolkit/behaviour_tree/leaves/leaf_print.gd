@@ -6,7 +6,7 @@ class_name LeafPrint extends BTLeaf
 @export var success: bool = true
 
 
-func tick(actor: Node, blackboard: Blackboard):
+func tick(actor: Node, blackboard: BtkBlackboard):
     if custom_text != "":
         print(custom_text)
     else:
