@@ -5,7 +5,7 @@ class_name FsmTransitionCondition extends Node
 
 signal evaluation_started()
 
-## [color=yellow]Warning:[/color] The result currently does not take the invert bool into account
+## [color=yellow][b]Warning[/b]:[/color] The result currently does not take the invert bool into account
 signal evaluation_finished(result: bool)
 
 ## Invert the result of the condition 
