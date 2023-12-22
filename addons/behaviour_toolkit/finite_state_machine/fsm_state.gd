@@ -1,7 +1,8 @@
 @icon("res://addons/behaviour_toolkit/icons/FSMState.svg")
 class_name FSMState extends BehaviourToolkit
-signal entered()
-signal exited()
+signal entered
+signal exited
+signal interrupted
 ## A state in a [FiniteStateMachine].
 
 
@@ -27,4 +28,8 @@ func _on_update(_actor: Node, _blackboard: BtkBlackboard) -> void:
 
 ## Executes before the state is exited.
 func _on_exit(_actor: Node, _blackboard: BtkBlackboard) -> void:
+	pass
+
+## Executes when the state is interrupted. Use this for cleanup
+func _on_interrupt(_actor: Node, _blackboard: BtkBlackboard) -> void:
 	pass

@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://db86clq06mpya"]
+
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm.gd" id="1_cwkf6"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm_default_transition_v2.gd" id="2_vqns6"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm_state.gd" id="3_hqtjb"]
+[ext_resource type="Script" path="res://examples/fsm/ui_accept_pressed_condition.gd" id="3_pv2gc"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/last_transition_debug_label.gd" id="4_jm5wt"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm_transition_v2.gd" id="4_wxplt"]
+[ext_resource type="Script" path="res://examples/fsm/ui_right_pressed_condition.gd" id="5_5yh0h"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/state_debug_label.gd" id="5_dy6w6"]
+[ext_resource type="Script" path="res://examples/fsm/ui_left_pressed_condition.gd" id="6_7tk8a"]
+
+[node name="DefaultTransitionExample" type="Node2D"]
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "actor")]
+script = ExtResource("1_cwkf6")
+autostart = true
+initial_state = NodePath("FSMState1")
+actor = NodePath("..")
+
+[node name="FsmDefaultTransitionV2" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("2_vqns6")
+next_state = NodePath("../FSMState3")
+
+[node name="UiAcceptPressedCondition" type="Node" parent="FiniteStateMachine/FsmDefaultTransitionV2"]
+script = ExtResource("3_pv2gc")
+
+[node name="FSMState1" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_hqtjb")
+
+[node name="ToState2Transition" type="Node" parent="FiniteStateMachine/FSMState1" node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_wxplt")
+next_state = NodePath("../../FSMState2")
+
+[node name="UiRightPressedCondition" type="Node" parent="FiniteStateMachine/FSMState1/ToState2Transition"]
+script = ExtResource("5_5yh0h")
+
+[node name="FSMState2" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_hqtjb")
+
+[node name="ToState1Transition" type="Node" parent="FiniteStateMachine/FSMState2" node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_wxplt")
+next_state = NodePath("../../FSMState1")
+
+[node name="UiLeftPressedCondition" type="Node" parent="FiniteStateMachine/FSMState2/ToState1Transition"]
+script = ExtResource("6_7tk8a")
+
+[node name="FSMState3" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_hqtjb")
+
+[node name="ToState1Transition" type="Node" parent="FiniteStateMachine/FSMState3" node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_wxplt")
+next_state = NodePath("../../FSMState1")
+
+[node name="UiLeftPressedCondition" type="Node" parent="FiniteStateMachine/FSMState3/ToState1Transition"]
+script = ExtResource("6_7tk8a")
+
+[node name="ToState2Transition" type="Node" parent="FiniteStateMachine/FSMState3" node_paths=PackedStringArray("next_state")]
+script = ExtResource("4_wxplt")
+next_state = NodePath("../../FSMState2")
+
+[node name="UiRightPressedCondition" type="Node" parent="FiniteStateMachine/FSMState3/ToState2Transition"]
+script = ExtResource("5_5yh0h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FiniteStateMachine"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StateDebugLabel" type="Label" parent="FiniteStateMachine/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("5_dy6w6")
+
+[node name="LastTransitionDebugLabel" type="Label" parent="FiniteStateMachine/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_jm5wt")

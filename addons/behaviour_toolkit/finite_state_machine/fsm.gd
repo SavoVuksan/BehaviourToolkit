@@ -51,6 +51,7 @@ var current_events: Array[String]
 ## Current BT Status
 var current_bt_status: BTLeaf.Status
 
+var default_transition: FsmDefaultTransitionV2
 
 func _ready() -> void:
 	connect("state_changed", _on_state_changed)
@@ -65,6 +66,8 @@ func _ready() -> void:
 
 	if not process_type:
 		process_type = ProcessType.PHYSICS
+	
+	default_transition = get_default_transition()
 
 	_setup_processing()
 
@@ -134,6 +137,8 @@ func _process_code(delta: float) -> void:
 	# Process the current state
 	active_state._on_update(actor, blackboard)
 
+	# Check the default transition
+	evaluate_default_transition(actor, blackboard)
 
 ## Changes the current state and calls the appropriate methods like _on_exit and _on_enter.
 func change_state(state: FSMState) -> void:
@@ -170,3 +175,25 @@ func _setup_processing() -> void:
 
 func _on_state_changed(state: FSMState) -> void:
 	pass
+
+## Returns the [FsmDefaultTransitionV2] if it is a child of this FSM otherwise null
+func get_default_transition() -> FsmDefaultTransitionV2:
+	for child in get_children():
+		if child is FsmDefaultTransitionV2:
+			return child as FsmDefaultTransitionV2
+	return null 
+
+func evaluate_default_transition(actor: Node, blackboard: BtkBlackboard):
+	if default_transition != null:
+		if default_transition.is_valid(actor, blackboard) and default_transition.next_state != active_state:
+			# Interrupt old state
+			active_state._on_interrupt(actor, blackboard)
+			active_state.interrupted.emit()
+
+			# Set new state and call enter
+			active_state = default_transition.next_state
+			state_changed.emit(active_state)
+			active_state._on_enter(actor, blackboard)
+			active_state.entered.emit()
+
+			
