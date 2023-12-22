@@ -1,27 +1,29 @@
-## This class is an alternative implementation of the Transition. This implementation takes an array of conditions that need to be met 
-## for the transition to happen. All conditions need to be true for the transition to trigger. Globals are not by default in the condition e.g Input
-## they need to be added manually in this class. Current variables accessable from the condition actor, blackboard, Input
+## This class is an alternative implementation of the Transition. This implementation takes an array of [FsmTransitionCondition] that need to be met 
+## for the transition to happen. All conditions need to be true for the transition to trigger. The conditions need to be child nodes of
+## the transition to work
 @icon("res://addons/behaviour_toolkit/icons/FSMTransition.svg")
+@tool
 class_name FsmTransitionV2 extends Node
 
 @export var next_state : FSMState
-@export var conditions : Array[FsmTransitionCondition] = []
 
+func _ready() -> void:
+	update_configuration_warnings()
+	child_order_changed.connect(update_configuration_warnings)
+
+## Evaluates all child []conditions. Currently all conditions need to be true for the transition to trigger
 func evaluate_conditions(actor: Node, blackboard: BtkBlackboard):
 	var succeeded = false
-	for cond in conditions:
-		if !cond.condition:
-			succeeded = false
-			return
-		var expression : Expression = Expression.new()
-		print(cond.condition)
-		var error = expression.parse(cond.condition, ["actor", "blackboard", "Input"])
-		if error != OK:
-			succeeded = false
-			return
-		
-		succeeded = expression.execute([actor, blackboard, Input],self) != cond.invert
-	
+
+	for cond in _get_conditions():
+		cond = cond as FsmTransitionCondition
+		cond.evaluation_started.emit()
+		succeeded = cond.evaluate_condition(actor, blackboard) != cond.invert
+		cond.evaluation_finished.emit(succeeded)
+
+		if !succeeded:
+			return succeeded
+
 	return succeeded
 
 ## Executed when the transition is taken.
@@ -41,3 +43,19 @@ func is_valid_event(current_event: String) -> bool:
 		return false
 	
 	return false
+
+func _get_conditions() -> Array:
+	var conditions : Array = []
+	for child in get_children():
+		if child is FsmTransitionCondition:
+			conditions.append(child)
+
+	return conditions
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings = []
+
+	if _get_conditions().size() == 0:
+		warnings.append("Needs at least 1 Child Condition to work")
+	
+	return warnings
