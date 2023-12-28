@@ -1,8 +1,12 @@
 @icon("./icons/BlackboardInitializer.svg")
 @tool
+## This node initializes the blackboard of the parent FiniteStatemachine
 class_name BtkBlackboardInitializer extends BehaviourToolkit
 
+## This will be the blackboard that is used for initialization
 @export var blackboard : BtkBlackboard
+
+## Inits the blackboard on scene load
 @export var init_on_scene_load : bool = true
 
 var fsm_blackboard : BtkBlackboard
