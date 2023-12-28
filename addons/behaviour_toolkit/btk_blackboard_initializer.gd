@@ -1,6 +1,6 @@
 @icon("./icons/BlackboardInitializer.svg")
 @tool
-class_name BtkBlackboardInitializer extends Node
+class_name BtkBlackboardInitializer extends BehaviourToolkit
 
 @export var blackboard : BtkBlackboard
 @export var init_on_scene_load : bool = true
