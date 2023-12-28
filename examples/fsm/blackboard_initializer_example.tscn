@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://5ci6h6tfqgmh"]
+
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/finite_state_machine/fsm.gd" id="1_aobew"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/btk_blackboard_initializer.gd" id="2_ytp6o"]
+[ext_resource type="Script" path="res://addons/behaviour_toolkit/btk_blackboard.gd" id="3_0v7mp"]
+[ext_resource type="Script" path="res://examples/fsm/print_blackboard_state.gd" id="4_ecwqf"]
+
+[sub_resource type="Resource" id="Resource_dkq3i"]
+script = ExtResource("3_0v7mp")
+content = {
+"test": 1,
+"test2": true
+}
+
+[node name="BlackboardInitializerExample" type="Node2D"]
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "actor")]
+script = ExtResource("1_aobew")
+autostart = true
+initial_state = NodePath("PrintBlackboardState")
+actor = NodePath("..")
+
+[node name="BtkBlackboardInitializer" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("2_ytp6o")
+blackboard = SubResource("Resource_dkq3i")
+
+[node name="PrintBlackboardState" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_ecwqf")
